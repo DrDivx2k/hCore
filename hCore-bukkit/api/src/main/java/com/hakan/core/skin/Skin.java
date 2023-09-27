@@ -109,6 +109,26 @@ public class Skin {
         return this.texture;
     }
 
+    @Nonnull
+    public static Skin fromTextureURL(@Nonnull String textureURL) {
+        try {
+            Validate.notNull(textureURL, "textureURL cannot be null!");
+            
+            // Assume the texture URL is already in the correct format
+            String texture = textureURL;
+            
+            // Extract shortTexture if it matches the pattern
+            Matcher matcher = PATTERN.matcher(textureURL);
+            String shortTexture = matcher.find() ? matcher.group("shortTexture") : "";
+
+            // You might want to fetch the signature as well if needed
+            
+            return new Skin(texture, "");
+        } catch (Exception e) {
+            return STEVE;
+        }
+    }
+
     /**
      * Gets signature.
      *
